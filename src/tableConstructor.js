@@ -1,6 +1,6 @@
 import './styles/table-constructor.pcss';
 import {create} from './documentUtils';
-import {Table} from './table';
+import {TableCore} from './table';
 
 const CSS = {
   editor: 'tc-editor',
@@ -21,7 +21,7 @@ export class TableConstructor {
    */
   constructor(data, config, api) {
     /** creating table */
-    this._table = new Table();
+    this._table = new TableCore();
     const size = this._resizeTable(data, config);
 
     this._fillTable(data, size);
@@ -59,10 +59,27 @@ export class TableConstructor {
     if (data.content !== undefined) {
       for (let i = 0; i < size.rows && i < data.content.length; i++) {
         for (let j = 0; j < size.cols && j < data.content[i].length; j++) {
-          // get current cell and her editable part
-          const input = this._table.body.rows[i].cells[j].querySelector('.' + CSS.inputField);
+          const cell = this._table.body.rows[i].cells[j];
+          const input = cell.querySelector('.' + CSS.inputField);
 
-          input.innerHTML = data.content[i][j];
+          if(data.content[i][j].cell.type === 'text') {
+            input.innerHTML = data.content[i][j].cell.value;
+          }
+
+          if(data.content[i][j].cell.type === 'image') {
+            let image = document.createElement('img');
+            image.src = data.content[i][j].cell.value;
+            input.appendChild(image);
+          }
+
+          for (const property in data.content[i][j].styles) {
+            cell.style[property] = data.content[i][j].styles[property];
+          }
+
+          if(data.content[i][j].hasOwnProperty('attributes')) {
+            cell.setAttribute('rowspan', data.content[i][j].attributes['rowspan']);
+            cell.setAttribute('colspan', data.content[i][j].attributes['colspan']);
+          }
         }
       }
     }

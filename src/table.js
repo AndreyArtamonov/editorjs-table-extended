@@ -13,7 +13,7 @@ const CSS = {
 /**
  * Generates and manages _table contents.
  */
-export class Table {
+export class TableCore {
   /**
    * Creates
    */
@@ -111,6 +111,11 @@ export class Table {
     for (let i = 0; i < rows.length; i++) {
       const cell = rows[i].insertCell(insertionIndex);
 
+      cell.style.borderTop = '1px solid #000';
+      cell.style.borderLeft = '1px solid #000';
+      cell.style.borderRight = '1px solid #000';
+      cell.style.borderBottom = '1px solid #000';
+
       this._fillCell(cell);
     }
   };
@@ -146,7 +151,6 @@ export class Table {
       : 0;
 
     const row = this._table.insertRow(insertionIndex);
-
     this._numberOfRows++;
 
     this._fillRow(row);

@@ -26,50 +26,125 @@
 <body>
 
 <div id="editorjs"></div>
-</div>
+
 <div class="ce-example__output">
-  <pre class="ce-example__output-content" id="output"></pre>
+    <pre class="ce-example__output-content" id="output"></pre>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-<script src="dist/bundle.js"></script>
+<script src="./dist/bundle.umd.js"></script>
 <script>
     const editor = new EditorJS({
-      autofocus: true,
-      data: {
-        version: '2.18.0',
-      },
-      placeholder: 'Table tool test',
-      holder: 'editorjs',
-      tools: {
-        table: {
-          class: Table,
-          inlineToolbar: true,
-          config: {
-            rows: 0,
-            cols: 0
-          },
-          
-        },
-      },
-      i18n: {
-        messages: {
-          tools: {
+        autofocus: true,
+        placeholder: 'Table tool test',
+        holder: 'editorjs',
+        tools: {
             table: {
-              "Insert column before": "Insert column before TRANSLATION",
-              "Insert column after": "Insert column after TRANSLATION",
-              "Insert row before": "Insert row before TRANSLATION",
-              "Insert row after": "Insert row after TRANSLATION",
-              "Delete row": "Delete row TRANSLATION",
-              "Delete column": "Delete column TRANSLATION",
-            }
-          },
+                class: Table,
+                inlineToolbar: true,
+                config: {
+                    rows: 0,
+                    cols: 0
+                },
+
+            },
         },
-      },
-      data : {
-        blocks: [
-        
-        ]
-      },
+        i18n: {
+            messages: {
+                tools: {
+                    table: {
+                        "Insert column before": "Insert column before TRANSLATION",
+                        "Insert column after": "Insert column after TRANSLATION",
+                        "Insert row before": "Insert row before TRANSLATION",
+                        "Insert row after": "Insert row after TRANSLATION",
+                        "Delete row": "Delete row TRANSLATION",
+                        "Delete column": "Delete column TRANSLATION",
+                    }
+                },
+            },
+        },
+        data: {
+            blocks: [
+                {
+                    "type": "table",
+                    "data": {
+                        "content": [
+                            [
+                                {
+                                    cell: {
+                                        type: 'image',
+                                        value: 'https://placehold.co/160x50'
+                                    },
+
+                                    attributes: {
+                                        colspan: 2
+                                    },
+
+                                    styles: {
+                                        textAlign: 'center'
+                                    }
+                                },
+                            ],
+                            [
+                                {
+                                    cell: {
+                                        type: 'text',
+                                        value: 'Перевернутый текст'
+                                    },
+
+                                    attributes: {
+                                        colspan: 2
+                                    },
+
+                                    styles: {
+                                        borderTop: '1px dashed blue',
+                                        borderLeft: '1px dashed red',
+                                        borderRight: '6px dashed green',
+                                        borderBottom: '1px dashed red',
+                                        writingMode: 'vertical-rl',
+                                        transform: 'scale(-1)'
+                                    }
+                                },
+                            ],
+                            [
+                                {
+                                    cell: {
+                                        type: 'text',
+                                        value: 'asd1',
+                                    },
+                                },
+                                {
+                                    cell: {
+                                        type: 'text',
+                                        value: 'asd2',
+                                    },
+                                },
+                                {
+                                    cell: {
+                                        type: 'text',
+                                        value: 'asd2',
+                                    },
+                                }
+                            ],
+                            [
+                                {
+                                    cell: {
+                                        type: 'text',
+                                        value: 'asd1',
+                                    },
+                                },
+                                {
+                                    cell: {
+                                        type: 'text',
+                                        value: 'asd2',
+                                    },
+                                }
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
     })
 </script>
 </body>
